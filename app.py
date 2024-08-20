@@ -9,8 +9,11 @@ from bson import ObjectId
 from pydantic import ValidationError
 from models import Course
 import math
+from flask_cors import CORS 
 
 app = Flask(__name__)
+#add cors
+CORS(app)
 
 app.config["MONGO_URI"] =  "mongodb+srv://adilsaju:HyutFcJn6uLxRqQl@cluster0.sovhz.mongodb.net/adcodedb?retryWrites=true&w=majority&appName=Cluster0"
 mongo = PyMongo(app)
