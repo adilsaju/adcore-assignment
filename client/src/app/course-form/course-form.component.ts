@@ -36,18 +36,38 @@ export class CourseFormComponent {
   }
 
   ngOnInit(): void {
-    if (this.courseId) {
-      this.courseService.getCourseById(this.courseId).subscribe(course => {
-        this.courseForm.patchValue(course);
-      });
-    }
+    this.route.paramMap.subscribe(params => {
+      this.courseId = params.get('id');
+      
+      if (this.courseId) {
+        console.log(" FOUND");
+
+        this.courseService.getCourseById(this.courseId).subscribe(course => {
+          this.courseForm.patchValue(course);
+        });
+
+      //only during edit disable
+      this.courseForm.get('City')?.disable();
+      this.courseForm.get('Country')?.disable();
+      this.courseForm.get('CourseName')?.disable();
+      this.courseForm.get('University')?.disable();
+
+      }
+      else{
+        console.log("NOT3 FOUND");
+  
+      }
+    })
+
   }
 
   onSubmit(): void {
     if (this.courseForm.valid) {
-      const formData = this.courseForm.value;
+      // const formData = this.courseForm.value;
+      const formData = this.courseForm.getRawValue();
+
       if (this.courseId) {
-        this.courseService.updateCourse(formData).subscribe(() => {
+        this.courseService.updateCourse(this.courseId, formData).subscribe(() => {
           this.router.navigate(['/']);
         });
       } else {

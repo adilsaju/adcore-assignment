@@ -23,8 +23,11 @@ export class CourseService {
     return this.http.post(`${this.apiUrl}/create_course`, course);
   }
 
-  updateCourse(course: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/update_course`, course );
+  // updateCourse(course: any): Observable<any> {
+  //   return this.http.put(`${this.apiUrl}/update_course`, course );
+  // }
+  updateCourse(id: string, course: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/update_course`, { ...course, _id: id });
   }
 
   deleteCourse(id: string): Observable<any> {

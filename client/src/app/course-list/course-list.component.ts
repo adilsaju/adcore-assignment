@@ -39,7 +39,7 @@ export class CourseListComponent {
     });
   }
 
-  editCourse(): void {
-    this.router.navigate(['/edit-course']);
+  editCourse(id: string): void {
+    this.router.navigate([`/edit-course/${id}`]);
   }
 }

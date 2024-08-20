@@ -17,7 +17,7 @@
               <td>{{ course.Country }}</td>
               <td>{{ course.CourseName }}</td>
               <td>
-                <button class="btn btn-primary" (click)="editCourse()">Edit</button>
+                <button class="btn btn-primary" (click)="editCourse(course._id)">Edit</button>
                 <button class="btn btn-danger" (click)="deleteCourse(course._id)">Delete</button>
               </td>
             </tr>

@@ -17,4 +17,7 @@ export class AppComponent {
   navigateToAddCourse(): void {
     this.router.navigate(['/add-course']);
   }
+  navigateToHome(): void {
+    this.router.navigate(['/']);
+  }
 }
