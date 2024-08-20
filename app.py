@@ -8,6 +8,7 @@ from datetime import datetime
 from bson import ObjectId
 from pydantic import ValidationError
 from models import Course
+import math
 
 app = Flask(__name__)
 
@@ -53,14 +54,34 @@ def serialize_document(doc):
 @app.get('/get_courses')
 def get_courses():
     try:
-        data = mongo.db.course.find()
-        
+
+        page = int(request.args.get("page",1))
+        per_page_limit = int(request.args.get("per_page_limit",10))
+
+        query = {}
+        for key, value in request.args.items():
+            if key not in ["page", "per_page_limit"]:
+                query[key.capitalize()] = {"$regex": value, "$options": "i"}
+
+        total_courses = mongo.db.course.count_documents(query)
+
+        # data = mongo.db.course.find()
+        #acutal filtered dataa
+        data = mongo.db.course.find(query).skip((page - 1) * per_page_limit).limit(per_page_limit)
+
         serialized_data = [serialize_document(item) for item in data]
     except Exception as e:
         print("DB error: " + str(e))
         return jsonify({"error": "Database error"}), 500
     else:
-        return jsonify(serialized_data)
+        # return jsonify(serialized_data)
+        return jsonify({
+            "total_courses": total_courses,
+            "total_pages": math.ceil(total_courses / per_page_limit),
+            "current_page": page,
+            "per_page_limit": per_page_limit,
+            "courses": serialized_data
+        })
 
 @app.put('/update_course')
 def update_course():
