@@ -10,10 +10,12 @@ export class CourseService {
 
   constructor(private http: HttpClient) { }
 
-  getCourses(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/get_courses`);
+  getCourses(page: number, perPageLimit: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/get_courses?page=${page}&per_page_limit=${perPageLimit}`);
   }
-
+  // getCourses(): Observable<any> {
+  //   return this.http.get(`${this.apiUrl}/get_courses`);
+  // }
   //TODO: getCourses with query params
   getCourseById(id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/get_courses/${id}`);
