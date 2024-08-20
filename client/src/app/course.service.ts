@@ -16,7 +16,7 @@ export class CourseService {
 
   //TODO: getCourses with query params
   getCourseById(id: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/get_course/${id}`);
+    return this.http.get(`${this.apiUrl}/get_courses/${id}`);
   }
 
   createCourse(course: any): Observable<any> {

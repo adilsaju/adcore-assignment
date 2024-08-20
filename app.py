@@ -96,6 +96,28 @@ def get_courses():
             "courses": serialized_data
         })
 
+
+@app.get('/get_courses/<id>')
+def get_course_by_id(id):
+    try:
+        try:
+            object_id = ObjectId(id)
+        except Exception as e:
+            print(f"Invalid ObjectId: {e}")
+            return jsonify({"error": "Invalid ObjectId format"}), 400
+        
+        course = mongo.db.course.find_one({"_id": object_id})
+        
+        if course is None:
+            return jsonify({"error": "course not found"}), 404
+        
+        serialized_course = serialize_document(course)
+        
+        return jsonify(serialized_course)
+    except Exception as e:
+        print("DB error: " + str(e))
+        return jsonify({"error": "daatabase error"}), 500
+
 @app.put('/update_course')
 def update_course():
     try:
