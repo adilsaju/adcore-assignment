@@ -22,6 +22,16 @@ export class CourseListComponent {
     this.loadCourses();
   }
 
+  getLength(id: string): Number {
+    let c = this.courses.find((x)=>x._id === id)
+    // console.log(c[0]);
+    let dd = new Date(c.EndDate).getTime()-new Date(c.StartDate).getTime()
+    let days = dd/ (1000*60*60*24)
+    console.log(days);
+    // console.log(id);
+    return days
+  }
+
   loadCourses(): void {
     this.courseService.getCourses().subscribe(data => {
       this.courses = data.courses;

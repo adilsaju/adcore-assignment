@@ -1,25 +1,35 @@
 <div class="container mt-3">
     <div class="row">
       <div class="col">
-        <h2>Course List</h2>
+        <h2>Courses</h2>
         <table class="table">
           <thead>
             <tr>
-              <th>City</th>
-              <th>Country</th>
+              <th> </th>
               <th>Course Name</th>
-              <th>Actions</th>
+              <th>Location</th>
+              <th>Start</th>
+              <th>Length</th>
+              <th>Price</th>
+
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let course of courses">
-              <td>{{ course.City }}</td>
-              <td>{{ course.Country }}</td>
-              <td>{{ course.CourseName }}</td>
               <td>
                 <button class="btn btn-primary" (click)="editCourse(course._id)">Edit</button>
                 <button class="btn btn-danger" (click)="deleteCourse(course._id)">Delete</button>
               </td>
+
+              <td>{{  course.CourseName }}</td>
+              <td>{{ course.Country }}, {{course.City}}, {{course.University}}</td>
+              <td>{{ course.StartDate }}</td>
+              <td>{{ getLength(course._id) }}</td>
+              <td>{{ course.Currency }} {{ course.Price }}</td>
+
+
+
+
             </tr>
           </tbody>
         </table>
