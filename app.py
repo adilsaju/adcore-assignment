@@ -58,6 +58,16 @@ def get_courses():
         page = int(request.args.get("page",1))
         per_page_limit = int(request.args.get("per_page_limit",10))
 
+        # search = request.args.get('search', '')
+        # query = {"$or": [
+        #     {"City": {"$regex": search, "$options": "i"}},
+        #     {"Country": {"$regex": search, "$options": "i"}},
+        #     {"CourseDescription": {"$regex": search, "$options": "i"}},
+        #     {"CourseName": {"$regex": search, "$options": "i"}},
+        #     {"Currency": {"$regex": search, "$options": "i"}},
+        #     {"University": {"$regex": search, "$options": "i"}}
+        # ]}
+
         query = {}
         for key, value in request.args.items():
             if key not in ["page", "per_page_limit"]:
