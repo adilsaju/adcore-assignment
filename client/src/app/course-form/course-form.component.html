@@ -1,1 +1,45 @@
-<p>course-form works!</p>
+<div class="container mt-3">
+  <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="CourseName">CourseName</label>
+      <input id="CourseName" formControlName="CourseName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="City">City</label>
+        <input id="City" formControlName="City" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="Country">Country</label>
+        <input id="Country" formControlName="Country" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="CourseDescription">CourseDescription</label>
+        <input id="CourseDescription" formControlName="CourseDescription" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="Currency">Currency</label>
+        <input id="Currency" formControlName="Currency" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="University">University</label>
+        <input id="University" formControlName="University" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="StartDate">StartDate</label>
+        <input id="StartDate" formControlName="StartDate" class="form-control" type="date"/>
+    </div>
+    <div class="form-group">
+        <label for="EndDate">EndDate</label>
+        <input id="EndDate" formControlName="EndDate" class="form-control" type="date"/>
+    </div>
+
+    <div class="form-group">
+        <label for="Price">Price</label>
+        <input id="Price" formControlName="Price" class="form-control" type="number"/>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>
