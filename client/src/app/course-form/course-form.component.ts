@@ -3,18 +3,23 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseService } from '../course.service';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { Observable, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-course-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgbTypeaheadModule],
   templateUrl: './course-form.component.html',
   styleUrl: './course-form.component.css'
 })
 export class CourseFormComponent {
   courseForm: FormGroup;
   @Input() courseId: string | null = null;
+  universities: string[] = [];
+  countries: string[] = [];
+  cities: string[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -57,9 +62,41 @@ export class CourseFormComponent {
         console.log("NOT3 FOUND");
   
       }
+      this.loadAutoCompleteOptions();
     })
 
   }
+  loadAutoCompleteOptions(): void {
+    this.courseService.getCourses(1, 100) // Load a large number to get all unique values
+      .subscribe(data => {
+        this.universities = Array.from(new Set(data.courses.map((course:any) => course.University)));
+        this.countries = Array.from(new Set(data.courses.map((course:any) => course.Country)));
+        this.cities = Array.from(new Set(data.courses.map((course:any) => course.City)));
+      });
+  }
+  searchUniversity = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term => term.length < 2 ? []
+        : this.universities.filter(v => v.toLowerCase().includes(term.toLowerCase())).slice(0, 10))
+    );
+
+  searchCountry = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term => term.length < 2 ? []
+        : this.countries.filter(v => v.toLowerCase().includes(term.toLowerCase())).slice(0, 10))
+    );
+
+  searchCity = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term => term.length < 2 ? []
+        : this.cities.filter(v => v.toLowerCase().includes(term.toLowerCase())).slice(0, 10))
+    );
 
   onSubmit(): void {
     if (this.courseForm.valid) {

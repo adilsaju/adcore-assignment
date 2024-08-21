@@ -6,16 +6,19 @@
     </div>
     <div class="form-group">
         <label for="University">University</label>
-        <input id="University" formControlName="University" class="form-control" />
-    </div>
-    <div class="form-group">
+        <input id="University" formControlName="University" class="form-control" 
+               [ngbTypeahead]="searchUniversity" />
+      </div>
+      <div class="form-group">
         <label for="Country">Country</label>
-        <input id="Country" formControlName="Country" class="form-control" />
-    </div>
-    <div class="form-group">
+        <input id="Country" formControlName="Country" class="form-control" 
+               [ngbTypeahead]="searchCountry" />
+      </div>
+      <div class="form-group">
         <label for="City">City</label>
-        <input id="City" formControlName="City" class="form-control" />
-    </div>
+        <input id="City" formControlName="City" class="form-control" 
+               [ngbTypeahead]="searchCity" />
+      </div>
 
 
     <div class="form-group">
