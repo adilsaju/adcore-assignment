@@ -25,7 +25,7 @@
               <td>{{ course.Country }}, {{ course.City }}, {{ course.University }}</td>
               <td>{{ course.StartDate }}</td>
               <td>{{ getLength(course._id) }}</td>
-              <td>{{ course.Currency }} {{ course.Price }}</td>
+              <td>{{ getCurrencySymbol(course.Currency) }} {{ course.Price }}</td>
             </tr>
 
           </tbody>

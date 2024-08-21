@@ -22,7 +22,7 @@ export class CourseFormComponent {
   countries: string[] = [];
   cities: string[] = [];
   currencies: string[] = ['USD', 'EUR', 'GBP', 'UGX', 'CAD'];
-
+  title1: string = this.courseId? "Edit Course" : "New Course"
 
   constructor(
     private fb: FormBuilder,
@@ -53,6 +53,7 @@ export class CourseFormComponent {
       
       if (this.courseId) {
         console.log(" FOUND");
+        this.title1 = "Edit Course"
 
         this.courseService.getCourseById(this.courseId).subscribe(course => {
           this.courseForm.patchValue(course);

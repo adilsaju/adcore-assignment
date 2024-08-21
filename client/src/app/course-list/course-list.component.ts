@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
-
+import { CURRENCY_SYMBOLS } from './cur';
 @Component({
   selector: 'app-course-list',
   standalone: true,
@@ -21,6 +21,7 @@ export class CourseListComponent {
   perPageLimit: number = 10;
   searchQuery: string = '';
 
+  CURRENCY_SYMBOLS = CURRENCY_SYMBOLS
 
   constructor(private courseService: CourseService, private router: Router, private route: ActivatedRoute) { }
 
@@ -65,6 +66,10 @@ export class CourseListComponent {
 
   get totalPagesArray(): number[] {
     return Array(this.totalPages).fill(0).map((_, i) => i + 1);
+  }
+
+  getCurrencySymbol(currencyCode: string): string {
+    return this.CURRENCY_SYMBOLS[currencyCode] || currencyCode;
   }
 
 }
