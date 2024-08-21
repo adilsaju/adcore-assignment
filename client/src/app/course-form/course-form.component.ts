@@ -35,11 +35,11 @@ export class CourseFormComponent {
       Country: ['', Validators.required],
       CourseName: ['', Validators.required],
       CourseDescription: [''],
-      Currency: [''],
-      EndDate: [''],
-      Price: [''],
-      StartDate: [''],
-      University: ['']
+      Currency: ['', Validators.required],
+      StartDate: ['',Validators.required],
+      EndDate: ['',Validators.required],
+      Price: ['', Validators.required],
+      University: ['', Validators.required]
     });
   }
 
@@ -117,6 +117,13 @@ export class CourseFormComponent {
           this.router.navigate(['/']);
         });
       }
+    }
+    else {
+      Object.keys(this.courseForm.controls).forEach(field => {
+        const control = this.courseForm.get(field);
+        control?.markAsTouched({ onlySelf: true });
+      });
+      return;
     }
   }
 }

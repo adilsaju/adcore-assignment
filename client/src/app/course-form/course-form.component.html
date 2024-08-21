@@ -3,21 +3,33 @@
     <div class="form-group">
       <label for="CourseName">Course Name</label>
       <input id="CourseName" formControlName="CourseName" class="form-control" />
+      <div *ngIf="courseForm.get('CourseName')?.hasError('required') && courseForm.get('CourseName')?.touched" class="error-message">
+        Course Name is required.
+      </div>
     </div>
     <div class="form-group">
         <label for="University">University</label>
         <input id="University" formControlName="University" class="form-control" 
                [ngbTypeahead]="searchUniversity" />
+      <div *ngIf="courseForm.get('University')?.hasError('required') && courseForm.get('University')?.touched" class="error-message">
+        University is required.
+    </div>
       </div>
       <div class="form-group">
         <label for="Country">Country</label>
         <input id="Country" formControlName="Country" class="form-control" 
                [ngbTypeahead]="searchCountry" />
+        <div *ngIf="courseForm.get('Country')?.hasError('required') && courseForm.get('Country')?.touched" class="error-message">
+        Country is required.
+    </div>
       </div>
       <div class="form-group">
         <label for="City">City</label>
         <input id="City" formControlName="City" class="form-control" 
                [ngbTypeahead]="searchCity" />
+        <div *ngIf="courseForm.get('City')?.hasError('required') && courseForm.get('City')?.touched" class="error-message">
+        City is required.
+    </div>
       </div>
 
 
@@ -28,18 +40,30 @@
             {{ currency }}
           </option>
         </select>
+        <div *ngIf="courseForm.get('Currency')?.hasError('required') && courseForm.get('Currency')?.touched" class="error-message">
+          Currency is required.
+      </div>
       </div>
     <div class="form-group">
         <label for="Price">Price</label>
         <input id="Price" formControlName="Price" class="form-control" type="number"/>
+        <div *ngIf="courseForm.get('Price')?.hasError('required') && courseForm.get('Price')?.touched" class="error-message">
+          Price is required.
+      </div>
     </div>
     <div class="form-group">
         <label for="StartDate">StartDate</label>
         <input id="StartDate" formControlName="StartDate" class="form-control" type="date"/>
+        <div *ngIf="courseForm.get('StartDate')?.hasError('required') && courseForm.get('StartDate')?.touched" class="error-message">
+          StartDate is required.
+      </div>
     </div>
     <div class="form-group">
         <label for="EndDate">EndDate</label>
         <input id="EndDate" formControlName="EndDate" class="form-control" type="date"/>
+        <div *ngIf="courseForm.get('EndDate')?.hasError('required') && courseForm.get('EndDate')?.touched" class="error-message">
+          EndDate is required.
+      </div>
     </div>
     <div class="form-group">
         <label for="CourseDescription">CourseDescription</label>
