@@ -17,20 +17,17 @@
           <tbody>
             <tr *ngFor="let course of courses" [ngbTooltip]="course.CourseDescription" tooltipClass="my-custom-class">
               <td>
-                <button class="btn btn-primary" (click)="editCourse(course._id)">Edit</button>
-                <button class="btn btn-danger" (click)="deleteCourse(course._id)">Delete</button>
+                <i class="fas fa-edit text-primary" (click)="editCourse(course._id)" aria-hidden="true" title="Edit"></i>
+                <i class="fas fa-trash text-danger" (click)="deleteCourse(course._id)" aria-hidden="true" title="Delete"></i>
               </td>
-
-              <td>{{  course.CourseName }}</td>
-              <td>{{ course.Country }}, {{course.City}}, {{course.University}}</td>
+            
+              <td>{{ course.CourseName }}</td>
+              <td>{{ course.Country }}, {{ course.City }}, {{ course.University }}</td>
               <td>{{ course.StartDate }}</td>
               <td>{{ getLength(course._id) }}</td>
               <td>{{ course.Currency }} {{ course.Price }}</td>
-
-
-
-
             </tr>
+
           </tbody>
         </table>
         <nav aria-label="Page navigation">

@@ -1,0 +1,9 @@
+i.fas {
+    cursor: pointer;
+    margin-right: 10px;
+    font-size: 1.2rem;
+  }
+  
+  i.fas:hover {
+    opacity: 0.5;
+  }
