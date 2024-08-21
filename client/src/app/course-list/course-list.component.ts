@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { CourseService } from '../course.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-course-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,NgbTooltipModule],
   templateUrl: './course-list.component.html',
   styleUrl: './course-list.component.css'
 })
