@@ -51,7 +51,7 @@ fetch_data()
 
 scheduler = BackgroundScheduler()
 print("line reached.................")
-scheduler.add_job(fetch_data, 'interval', minutes=5)
+scheduler.add_job(fetch_data, 'interval', minutes=1)
 scheduler.start()
 scheduler.print_jobs()
 
