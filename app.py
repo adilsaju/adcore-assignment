@@ -10,6 +10,7 @@ from pydantic import ValidationError
 from models import Course
 import math
 from flask_cors import CORS 
+from apscheduler.schedulers.background import BackgroundScheduler
 
 app = Flask(__name__)
 #add cors
@@ -20,7 +21,8 @@ mongo = PyMongo(app)
 mongo.db.course.create_index([("timestamp", ASCENDING)], expireAfterSeconds=600)
 
 
-def check_expiration():
+def fetch_data():
+    print("STARTED!!!")
     print("#"*40)
     if mongo.db.course.count_documents({}) == 0:
         print("No data found or data is expired. Fetching new data...")
@@ -43,7 +45,15 @@ def check_expiration():
     else:
         print("not downloading anything")
 
-check_expiration()
+# check_expiration()
+#STARTING TIME FETCH (ONE TIME THING)
+fetch_data()
+
+scheduler = BackgroundScheduler()
+print("line reached.................")
+scheduler.add_job(fetch_data, 'interval', minutes=5)
+scheduler.start()
+scheduler.print_jobs()
 
 @app.route('/')
 def home():
@@ -182,7 +192,13 @@ def create_course():
     else:
         return jsonify({"message": "added the couse, id: "+ str(result.inserted_id)})
 
-
+# @app.before_first_request
+# def start_scheduler():
+#     if not scheduler.running:
+#         scheduler.start()
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    try:
+        app.run(debug=True)
+    except (KeyboardInterrupt, SystemExit):
+        scheduler.shutdown()
