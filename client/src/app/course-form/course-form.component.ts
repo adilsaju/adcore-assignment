@@ -6,11 +6,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, of } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-course-form',
   standalone: true,
-  imports: [ReactiveFormsModule, NgbTypeaheadModule],
+  imports: [ReactiveFormsModule, NgbTypeaheadModule, CommonModule],
   templateUrl: './course-form.component.html',
   styleUrl: './course-form.component.css'
 })
@@ -20,6 +21,8 @@ export class CourseFormComponent {
   universities: string[] = [];
   countries: string[] = [];
   cities: string[] = [];
+  currencies: string[] = ['USD', 'EUR', 'GBP', 'UGX', 'CAD'];
+
 
   constructor(
     private fb: FormBuilder,
@@ -72,6 +75,8 @@ export class CourseFormComponent {
         this.universities = Array.from(new Set(data.courses.map((course:any) => course.University)));
         this.countries = Array.from(new Set(data.courses.map((course:any) => course.Country)));
         this.cities = Array.from(new Set(data.courses.map((course:any) => course.City)));
+        this.currencies = Array.from(new Set(data.courses.map((course:any) => course.Currency)));
+
       });
   }
   searchUniversity = (text$: Observable<string>) =>
