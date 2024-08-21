@@ -43,6 +43,10 @@ export class CourseFormComponent {
     });
   }
 
+  navigateToHome(): void {
+    this.router.navigate(['/']);
+  }
+
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.courseId = params.get('id');
