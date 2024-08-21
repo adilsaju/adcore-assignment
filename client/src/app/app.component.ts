@@ -13,11 +13,16 @@ import { Router } from '@angular/router';
 export class AppComponent {
   constructor(private router: Router) { }
   
+  searchQuery = '';
   title = 'client';
   navigateToAddCourse(): void {
     this.router.navigate(['/add-course']);
   }
   navigateToHome(): void {
     this.router.navigate(['/']);
+  }
+  onSearchChange(query: string): void {
+    this.searchQuery = query;
+    this.router.navigate(['/'], { queryParams: { search: this.searchQuery } });
   }
 }

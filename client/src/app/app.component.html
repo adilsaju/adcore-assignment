@@ -4,7 +4,7 @@
   <div class="d-flex align-items-center mb-3">
     <button class="btn btn-secondary me-2" (click)="navigateToHome()">Home</button>
     <button class="btn btn-primary me-2" (click)="navigateToAddCourse()">Add new course</button>
-    <input type="search" class="form-control w-25" placeholder="Search">
+    <input #searchBox type="search" class="form-control w-25" placeholder="Search" (input)="onSearchChange(searchBox.value)">
   </div>
 </div>
 

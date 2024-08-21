@@ -3,6 +3,7 @@ import { CourseService } from '../course.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-course-list',
@@ -17,13 +18,18 @@ export class CourseListComponent {
   totalCourses: number = 0;
   totalPages: number = 0;
 
-  perPageLimit = 10;
+  perPageLimit: number = 10;
+  searchQuery: string = '';
 
 
-  constructor(private courseService: CourseService, private router: Router) { }
+  constructor(private courseService: CourseService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.loadCourses();
+    // this.loadCourses();
+      this.route.queryParams.subscribe(params => {
+      this.searchQuery = params['search'] || '';
+      this.loadCourses(this.currentPage, this.perPageLimit, this.searchQuery);
+    });
   }
 
   getLength(id: string): Number {
@@ -36,8 +42,8 @@ export class CourseListComponent {
     return days
   }
 
-  loadCourses(page: number = 1, perPageLimit: number = 10): void {
-    this.courseService.getCourses(page, perPageLimit).subscribe(data => {
+  loadCourses(page: number = 1, perPageLimit: number = 10, search: string = ''): void {
+    this.courseService.getCourses(page, perPageLimit, search).subscribe(data => {
       this.courses = data.courses;
       this.currentPage = data.current_page;
       this.totalCourses = data.total_courses;
