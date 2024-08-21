@@ -42,7 +42,7 @@ export class CourseListComponent {
     return days
   }
 
-  loadCourses(page: number = 1, perPageLimit: number = 10, search: string = ''): void {
+  loadCourses(page: number = 1, perPageLimit: number = 10, search: string = this.searchQuery): void {
     this.courseService.getCourses(page, perPageLimit, search).subscribe(data => {
       this.courses = data.courses;
       this.currentPage = data.current_page;
