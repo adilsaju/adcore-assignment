@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+
+.ttc .tooltip-inner {
+    background-color: #0a0200;
+    color: #fff;
+    /* padding: 2rem; */
+    margin: 1rem;
+}
